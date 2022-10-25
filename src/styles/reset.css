@@ -124,13 +124,13 @@ table {
 }
 
 @font-face {
-  font-family: "Roboto";
-  src: local("Roboto");
+  font-family: "Lucida Console";
+  src: local("Lucida Console");
 }
 
 body {
   margin: 0;
-  font-family: "Roboto Condensed", sans-serif;
+  font-family: "Lucida Console Condensed";
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -142,7 +142,7 @@ body {
 }
 
 code {
-  font-family: "Roboto Condensed";
+  font-family: "Lucida Console Condensed";
 }
 
 body::-webkit-scrollbar {

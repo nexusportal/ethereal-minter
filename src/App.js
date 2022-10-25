@@ -7,6 +7,7 @@ import styled from "styled-components";
 import CountDown from "./countdown";
 import Web3 from "web3";
 import { FaTelegramPlane, FaDiscord, FaTwitter } from "react-icons/fa";
+import loop from './bg.mp4'
 
 
 const truncate = (input, len) =>
@@ -21,7 +22,7 @@ export const StyledButton = styled.button`
   padding: 10px;
   font-weight: bold;
   color: var(--secondary-text);
-  width: 100px;
+  width: 150px;
   cursor: pointer;
   box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
   -webkit-box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
@@ -221,7 +222,7 @@ function App() {
   return (
     <s.Screen>
       <ResponsiveWrapper>
-        {/* <video
+        <video
           autoPlay
           loop
           muted
@@ -240,13 +241,13 @@ function App() {
 
           <source src={loop} type="video/mp4" />
 
-        </video> */}
+        </video>
 
         <s.Container
           flex={1}
           ai={"center"}
           style={{ padding: 24, backgroundColor: "var(--primary)", }}
-        image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.jpg" : null}
+        // image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.jpg" : null}
         >
           <a rel="noopener noreferrer" href="https://xdcnexus.com">
             <StyledLogo alt={"logo"} src={"/config/images/logo.png"} />
@@ -293,7 +294,7 @@ function App() {
               }}
             >
               <StyledLink target={"_blank"} href={CONFIG.SCAN_LINK}>
-                {truncate(CONFIG.CONTRACT_ADDRESS, 15)}
+                The NEXUS Contract
               </StyledLink>
             </s.TextDescription>
             <s.SpacerSmall />
@@ -359,7 +360,7 @@ function App() {
                         getData();
                       }}
                     >
-                      CONNECT
+                        CONNECT TO THE NEXUS CORE
                     </StyledButton>
                     {blockchain.errorMsg !== "" ? (
                       <>
