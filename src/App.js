@@ -296,6 +296,12 @@ function App() {
               <StyledLink target={"_blank"} href={CONFIG.SCAN_LINK}>
                 The Nexus Ethereals Contract
               </StyledLink>
+                <br />
+                <br />
+              <StyledLink target={"_blank"} href={"https://xrpl.org/get-started-evm-sidechain.html"}>
+                LEARN TO BRIDGE EXRP
+              </StyledLink>
+
             </s.TextDescription>
             <s.SpacerSmall />
             {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
@@ -468,7 +474,7 @@ function App() {
 
         
 
-          <StyledLink target={"_blank"} href={"https://seer.xnexus.io/"}>
+          <StyledLink target={"_blank"} href={"https://etherealviewer.xnexus.io/"}>
             {"SEE YOUR NEXUS ETHEREALS"}
           </StyledLink>
 
