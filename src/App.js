@@ -249,22 +249,22 @@ function App() {
           style={{ padding: 24, backgroundColor: "var(--primary)", }}
         // image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.jpg" : null}
         >
-          <a rel="noopener noreferrer" href="https://xdcnexus.com">
+          <a rel="noopener noreferrer" href="https://xnexus.io">
             <StyledLogo alt={"logo"} src={"/config/images/logo.png"} />
           </a>
 
           <div className="social-container">
 
-            <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/">
+            <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/PoweredByNEXUS">
               <FaTwitter color="white" size={30} />
             </a>
-            <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/">
+            <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/pSVRKzyQvs">
               <FaDiscord color="white" size={30} />
             </a>
 
-            <a target="_blank" rel="noopener noreferrer" href="https://t.me/">
+            {/* <a target="_blank" rel="noopener noreferrer" href="https://t.me/">
               <FaTelegramPlane color="white" size={30} />
-            </a>
+            </a> */}
 
           </div>
 
@@ -294,7 +294,7 @@ function App() {
               }}
             >
               <StyledLink target={"_blank"} href={CONFIG.SCAN_LINK}>
-                The NEXUS Contract
+                The Nexus Ethereals Contract
               </StyledLink>
             </s.TextDescription>
             <s.SpacerSmall />
@@ -468,8 +468,8 @@ function App() {
 
         
 
-          <StyledLink target={"_blank"} href={"https://seer.xdcnexus.com/"}>
-            {"SEE YOUR NEXUS CELESTIALS"}
+          <StyledLink target={"_blank"} href={"https://seer.xnexus.io/"}>
+            {"SEE YOUR NEXUS ETHEREALS"}
           </StyledLink>
 
           <s.Container flex={1} jc={"center"} ai={"center"} >

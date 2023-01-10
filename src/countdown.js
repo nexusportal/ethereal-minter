@@ -81,7 +81,7 @@ class CountDown extends React.Component {
                         color: "white",
                     }}
                 >
-                    When the Mint phase is over, the snapshot is taken, and the airdrop is completed the DEX will be live at xdcnexus.com.
+                    When the Mint phase is over, the snapshot is taken, and the airdrop is completed the DEX will be live at xnexus.io.
 
                 </s.TextTitle>
             </div>
