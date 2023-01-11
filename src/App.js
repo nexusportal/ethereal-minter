@@ -87,9 +87,9 @@ export const RoundButtonWrapper = styled.div`
 `;
 
 export const StyledLogo = styled.img`
-  width: 75px;
+  width: 200px;
   @media (min-width: 767px) {
-    width: 75px;
+    width: 150px;
   }
   transition: width 0.5s;
   transition: height 0.5s;
@@ -113,6 +113,8 @@ export const StyledImg = styled.img`
 export const StyledLink = styled.a`
   color: var(--secondary);
   text-decoration: none;
+  font-size: 20px;
+
 `;
 
 function App() {
@@ -270,9 +272,7 @@ function App() {
 
 
 
-          <s.Container flex={1} jc={"center"} ai={"center"}>
-            <StyledImg alt={"coregif"} src={"/config/images/example.gif"} style={{ width: 125 }}/>
-          </s.Container>
+
 
           <s.Container
             flex={2}
@@ -439,7 +439,7 @@ function App() {
                           getData();
                         }}
                       >
-                        {claimingNft ? "BUSY" : "MINT"}
+                        {claimingNft ? "ASCENDING!" : "MINT"}
                       </StyledButton>
                     </s.Container>
 
@@ -470,14 +470,17 @@ function App() {
 
 
           
+          <s.Container flex={1} jc={"center"} ai={"center"}>
+            <StyledImg alt={"coregif"} src={"/config/images/example.gif"} style={{ width: 125 }}/>
+          </s.Container>
 
+          <br />
 
-        
 
           <StyledLink target={"_blank"} href={"https://etherealviewer.xnexus.io/"}>
             {"SEE YOUR NEXUS ETHEREALS"}
           </StyledLink>
-
+                    <br />
           <s.Container flex={1} jc={"center"} ai={"center"} >
             <StyledImg alt={"previewgif"} src={"/config/images/preview.gif"} />
           </s.Container>
