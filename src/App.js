@@ -471,7 +471,7 @@ function App() {
 
           
           <s.Container flex={1} jc={"center"} ai={"center"}>
-            <StyledImg alt={"coregif"} src={"/config/images/example.gif"} style={{ width: 125 }} href={"https://exrp.viewer.thenexusportal.io/"}/>
+            <StyledImg alt={"coregif"} src={"/config/images/example.gif"} style={{ width: 125 }} target={"_blank"} href={"https://exrp.viewer.thenexusportal.io/"}/>
           </s.Container>
 
           <br />
@@ -482,7 +482,7 @@ function App() {
           </StyledLink>
                     <br />
           <s.Container flex={1} jc={"center"} ai={"center"} >
-            <StyledImg alt={"previewgif"} src={"/config/images/preview.gif"} href={"https://exrp.viewer.thenexusportal.io/"} />
+            <StyledImg alt={"previewgif"} src={"/config/images/preview.gif"} target={"_blank"} href={"https://exrp.viewer.thenexusportal.io/"} />
           </s.Container>
 
 
