@@ -251,7 +251,7 @@ function App() {
           style={{ padding: 24, backgroundColor: "var(--primary)", }}
         // image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.jpg" : null}
         >
-          <a rel="noopener noreferrer" href="https://xnexus.io">
+          <a rel="noopener noreferrer" href="https://thenexusportal.io/">
             <StyledLogo alt={"logo"} src={"/config/images/logo.png"} />
           </a>
 
@@ -260,7 +260,7 @@ function App() {
             <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/PoweredByNEXUS">
               <FaTwitter color="white" size={30} />
             </a>
-            <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/pSVRKzyQvs">
+            <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/nexusportal">
               <FaDiscord color="white" size={30} />
             </a>
 
@@ -477,7 +477,7 @@ function App() {
           <br />
 
 
-          <StyledLink target={"_blank"} href={"https://etherealviewer.xnexus.io/"}>
+          <StyledLink target={"_blank"} href={"https://exrp.viewer.thenexusportal.io/"}>
             {"SEE YOUR NEXUS ETHEREALS"}
           </StyledLink>
                     <br />

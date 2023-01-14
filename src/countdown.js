@@ -75,7 +75,7 @@ class CountDown extends React.Component {
                         </div>
                     </div>
                 </div>
-                <s.TextTitle
+                {/* <s.TextTitle
                     style={{
                         textAlign: "center",
                         color: "white",
@@ -83,7 +83,7 @@ class CountDown extends React.Component {
                 >
                     When the Mint phase is over, the snapshot is taken, and the airdrop is completed the DEX will be live at xnexus.io.
 
-                </s.TextTitle>
+                </s.TextTitle> */}
             </div>
         );
     }
