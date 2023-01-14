@@ -9,7 +9,7 @@
   "NFT_NAME": "Nexus Ethereals",
   "SYMBOL": "ETHER",
   "MAX_SUPPLY": 11111,
-  "ETH_COST": 3,
+  "ETH_COST": 333,
   "DISPLAY_COST": 333,
   "GAS_LIMIT": 2500000,
   "MARKETPLACE": "https://thenexusportal.io/",
