@@ -178,21 +178,21 @@ function App() {
   const decrementMintAmount = () => {
     let newMintAmount = mintAmount - 1;
     if (newMintAmount < 1) {
-      newMintAmount = 50;
+      newMintAmount = 1;
     }
     setMintAmount(newMintAmount);
   };
 
   const incrementMintAmount = () => {
     let newMintAmount = mintAmount + 1;
-    if (newMintAmount > 50) {
+    if (newMintAmount > 1) {
       newMintAmount = 1;
     }
     setMintAmount(newMintAmount);
   };
 
   const whaleMint = () => {
-    let whaleMintAmount = 50;
+    let whaleMintAmount = 1;
     setMintAmount(whaleMintAmount);
   };
 
@@ -396,7 +396,7 @@ function App() {
                     <s.SpacerMedium />
 
                     <s.Container ai={"center"} jc={"center"} fd={"row"} style={{ width: 125 }}>
-                      <StyledRoundButton
+                      {/* <StyledRoundButton
                         style={{ lineHeight: 0.4 }}
                         disabled={claimingNft ? 1 : 0}
                         onClick={(e) => {
@@ -405,7 +405,7 @@ function App() {
                         }}
                       >
                         -
-                      </StyledRoundButton>
+                      </StyledRoundButton> */}
                       <s.SpacerMedium />
 
                       <s.TextDescription
@@ -418,7 +418,7 @@ function App() {
                         {mintAmount}
                       </s.TextDescription>
                       <s.SpacerMedium />
-                      <StyledRoundButton
+                      {/* <StyledRoundButton
                         disabled={claimingNft ? 1 : 0}
                         onClick={(e) => {
                           e.preventDefault();
@@ -426,7 +426,7 @@ function App() {
                         }}
                       >
                         +
-                      </StyledRoundButton>
+                      </StyledRoundButton> */}
                     </s.Container>
 
                     <s.SpacerSmall />
