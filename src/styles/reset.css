@@ -130,14 +130,13 @@ table {
 }
 
 @font-face {
-  font-family: "Roboto Mono";
-  src: local("Roboto Mono");
+  font-family: 'Orbitron', sans-serif;
+  src: local("Orbitron");
 }
 
 body {
   margin: 0;
-  font-family: "Roboto Mono", monospace;
-  -webkit-font-smoothing: antialiased;
+ font-family: 'Orbitron', sans-serif;  -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
@@ -148,8 +147,7 @@ body {
 }
 
 code {
-  font-family: "Roboto Mono", monospace;
-}
+ font-family: 'Orbitron', sans-serif;}
 
 body::-webkit-scrollbar {
   display: none;

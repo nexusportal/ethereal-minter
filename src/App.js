@@ -3,68 +3,45 @@ import { useDispatch, useSelector } from "react-redux";
 import { connect } from "./redux/blockchain/blockchainActions";
 import { fetchData } from "./redux/data/dataActions";
 import * as s from "./styles/globalStyles";
-import styled from "styled-components";
+import styled, { keyframes } from 'styled-components';
 import CountDown from "./countdown";
 import Web3 from "web3";
-import { FaTelegramPlane, FaDiscord, FaTwitter } from "react-icons/fa";
+import { FaTelegramPlane, FaDiscord, FaTwitter, FaPlus, FiMinus, FaMinus } from "react-icons/fa";
 import loop from './bg.mp4'
-import { Arwes, ThemeProvider, createTheme, Frame, Button, Loading, Logo } from 'arwes';
+import { Arwes, ThemeProvider, SoundsProvider, createSounds, createTheme, Frame, Button, Loading, Logo, Words } from 'arwes';
 import clickSound from './object.mp3';
+
+const theme = createTheme({
+  typography: {
+    headerFontFamily: 'Orbitron, sans-serif',
+    buttonFontFamily: 'Orbitron, sans-serif',
+  },
+});
 
 const clickAudio = new Audio(clickSound);
 
-const theme = createTheme();
+const rotateAnimation = keyframes`
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+`;
+
+const sounds = {
+  shared: { volume: 1 },
+  players: {
+    click: { sound: { src: ['/click.mp3'] } },
+    typing: { sound: { src: ['/type.mp3'] } },
+    deploy: { sound: { src: ['/object.mp3'] } },
+  },
+};
 
 
 const truncate = (input, len) =>
   input.length > len ? `${input.substring(0, len)}...` : input;
 
-export const StyledButton = styled.button`
-  padding: 10px;
-  border-radius: 10px;
-  border: 2px solid;
-  background: rgb(209,170,41);
-  background: linear-gradient(90deg, rgba(75,3,156,1) 0%, rgba(95,95,172,1) 43%, rgba(0,212,255,1) 100%);
-  padding: 10px;
-  font-weight: bold;
-  color: var(--secondary-text);
-  width: 150px;
-  cursor: pointer;
-  box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
-  -webkit-box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
-  -moz-box-shadow: 0px 6px 0px -2px rgba(250, 250, 250, 0.3);
-  :active {
-    box-shadow: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-  }
-`;
-
-export const StyledRoundButton = styled.button`
-  padding: 10px;
-  border-radius: 10px;
-  border: 2px solid;
-  background: rgb(209,170,41);
-  background: linear-gradient(90deg, rgba(75,3,156,1) 0%, rgba(95,95,172,1) 43%, rgba(0,212,255,1) 100%);
-  padding: 10px;
-  font-weight: bold;
-  font-size: 15px;
-  color: var(--primary-text);
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
-  -webkit-box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
-  -moz-box-shadow: 0px 4px 0px -2px rgba(250, 250, 250, 0.3);
-  :active {
-    box-shadow: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-  }
-`;
 
 export const ResponsiveWrapper = styled.div`
   display: flex;
@@ -78,27 +55,14 @@ export const ResponsiveWrapper = styled.div`
   }
 `;
 
-export const RoundButtonWrapper = styled.div`
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 50%;
-  @media (min-width: 767px) {
-    flex-direction: row;
-    width: 50%;
-
-  }
-`;
 
 export const StyledLogo = styled.img`
-  width: 200px;
+  width: 150px;
   @media (min-width: 767px) {
     width: 150px;
   }
-  transition: width 0.5s;
-  transition: height 0.5s;
+  transition: width 0.5s, height 0.5s; /* Combined transition properties */
+  animation: ${rotateAnimation} 30s linear infinite; /* Apply the rotation animation */
 `;
 
 export const StyledImg = styled.img`
@@ -174,7 +138,7 @@ function App() {
       .then((receipt) => {
         console.log(receipt);
         setFeedback(
-          `You have claimed ${CONFIG.NFT_NAME}!`
+          `You have summoned ${CONFIG.NFT_NAME}!`
         );
         setClaimingNft(false);
         dispatch(fetchData(blockchain.account));
@@ -191,8 +155,8 @@ function App() {
 
   const incrementMintAmount = () => {
     let newMintAmount = mintAmount + 1;
-    if (newMintAmount > 1) {
-      newMintAmount = 1;
+    if (newMintAmount > 10) {
+      newMintAmount = 10;
     }
     setMintAmount(newMintAmount);
   };
@@ -230,118 +194,118 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-        <Frame animate>
-          <s.Screen>
-            <ResponsiveWrapper>
-              <video
-                autoPlay
-                loop
-                muted
-                style={{
-                  position: "fixed",
-                  width: "100%",
-                  left: "50%",
-                  top: "50%",
-                  height: "100%",
-                  objectFit: "cover",
-                  transform: "translate(-50%, -50%)",
-                  zIndex: "-1",
+      <SoundsProvider sounds={sounds}>
+
+        <Arwes>
+          <Frame animate>
+            <s.Screen>
+              <ResponsiveWrapper>
+                <video
+                  autoPlay
+                  loop
+                  muted
+                  style={{
+                    position: "fixed",
+                    width: "100%",
+                    left: "50%",
+                    top: "50%",
+                    height: "100%",
+                    objectFit: "cover",
+                    transform: "translate(-50%, -50%)",
+                    zIndex: "-1",
 
 
-                }}>
+                  }}>
 
-                <source src={loop} type="video/mp4" />
+                  <source src={loop} type="video/mp4" />
 
-              </video>
-
-
-              <s.Container
-                flex={1}
-                ai={"center"}
-                style={{ padding: 24, backgroundColor: "var(--primary)", }}
-              // image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.jpg" : null}
-              >
-                <a rel="noopener noreferrer" href="https://thenexusportal.io/">
-                  <StyledLogo alt={"logo"} src={"/config/images/logo.png"} />
-                </a>
-
-
-                <div className="social-container">
-
-                  <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/PoweredByNEXUS">
-                    <FaTwitter color="white" size={30} />
-                  </a>
-                  <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/nexusportal">
-                    <FaDiscord color="white" size={30} />
-                  </a>
-
-                  {/* <a target="_blank" rel="noopener noreferrer" href="https://t.me/">
-              <FaTelegramPlane color="white" size={30} />
-            </a> */}
-
-                </div>
-
-
-
+                </video>
 
 
                 <s.Container
-                  flex={2}
-                  jc={"center"}
+                  flex={1}
                   ai={"center"}
-                  style={{
-                    backgroundColor: "var(--gold-gradient-box)",
-                    padding: 1,
-                    // borderRadius: 24,
-                    // border: "4px solid var(--secondary)",
-                    // boxShadow: "0px 5px 11px 2px rgba(0,0,0,0.7)",
-                  }}
+                  style={{ padding: 24, backgroundColor: "var(--primary)", }}
+                // image={CONFIG.SHOW_BACKGROUND ? "/config/images/bg.jpg" : null}
                 >
+                  <a rel="noopener noreferrer" href="https://thenexusportal.io/">
+                    <StyledLogo alt={"logo"} src={"/config/images/logo.png"} />
+                  </a>
 
-                  <s.TextDescription
+
+                  <div className="social-container">
+
+                    <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/PoweredByNEXUS">
+                      <FaTwitter color="white" size={30} />
+                    </a>
+                    <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/nexusportal">
+                      <FaDiscord color="white" size={30} />
+                    </a>
+
+                    {/* <a target="_blank" rel="noopener noreferrer" href="https://t.me/">
+              <FaTelegramPlane color="white" size={30} />
+            </a> */}
+
+                  </div>
+
+                  <h1><Words animate>Welcome To The Nexus Portal</Words></h1>
+
+                  <s.Container
+                    flex={2}
+                    jc={"center"}
+                    ai={"center"}
                     style={{
-                      textAlign: "center",
-                      color: "var(--primary-text)",
+                      backgroundColor: "var(--gold-gradient-box)",
+                      padding: 1,
+                      // borderRadius: 24,
+                      // border: "4px solid var(--secondary)",
+                      // boxShadow: "0px 5px 11px 2px rgba(0,0,0,0.7)",
                     }}
                   >
-                    <StyledLink target={"_blank"} href={CONFIG.SCAN_LINK} onClick={(e) => {clickAudio.play();}}>
-                      The Nexus Ethereals Contract
-                    </StyledLink>
-                    <br />
-                    <br />
-                    <StyledLink target={"_blank"} href={"https://xrpl.org/get-started-evm-sidechain.html"} onClick={(e) => {clickAudio.play();}}>
-                      LEARN TO BRIDGE TO EXRP
-                    </StyledLink>
 
-                  </s.TextDescription>
-                  <s.SpacerSmall />
-                  {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
-                    <>
-                      <s.TextTitle
-                        style={{ textAlign: "center", color: "var(--accent-text)" }}
-                      >
-                        The sale has ended.
-                      </s.TextTitle>
-                      <s.TextDescription
-                        style={{ textAlign: "center", color: "var(--accent-text)" }}
-                      >
-                        You can still find {CONFIG.NFT_NAME} on
-                      </s.TextDescription>
-                      <s.SpacerSmall />
-                      <StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
-                        {CONFIG.MARKETPLACE}
+                    <s.TextDescription
+                      style={{
+                        textAlign: "center",
+                        color: "var(--primary-text)",
+                      }}
+                    >
+
+                      <br />
+                      <StyledLink target={"_blank"} href={"https://xrpl.org/get-started-evm-sidechain.html"} onClick={(e) => { clickAudio.play(); }}>
+                        LEARN TO BRIDGE TO EXRP
                       </StyledLink>
-                    </>
-                  ) : (
-                    <>
-                      <s.TextTitle
-                        style={{ textAlign: "center", color: "var(--accent-text)" }}
-                      >
-                        {CONFIG.NFT_NAME} cost {CONFIG.DISPLAY_COST}{" "}
-                        {CONFIG.NETWORK.SYMBOL}
-                      </s.TextTitle>
-                      <s.SpacerXSmall />
-                      {/* 
+
+                    </s.TextDescription>
+
+                    <s.SpacerSmall />
+
+                    {Number(data.totalSupply) >= CONFIG.MAX_SUPPLY ? (
+                      <>
+                        <s.TextTitle
+                          style={{ textAlign: "center", color: "var(--accent-text)" }}
+                        >
+                          The sale has ended.
+                        </s.TextTitle>
+                        <s.TextDescription
+                          style={{ textAlign: "center", color: "var(--accent-text)" }}
+                        >
+                          You can still find {CONFIG.NFT_NAME} on
+                        </s.TextDescription>
+                        <s.SpacerSmall />
+                        <StyledLink target={"_blank"} href={CONFIG.MARKETPLACE_LINK}>
+                          {CONFIG.MARKETPLACE}
+                        </StyledLink>
+                      </>
+                    ) : (
+                      <>
+                        <s.TextTitle
+                          style={{ textAlign: "center", color: "var(--accent-text)" }}
+                        >
+                          {CONFIG.NFT_NAME} cost {CONFIG.DISPLAY_COST}{" "}
+                          {CONFIG.NETWORK.SYMBOL}
+                        </s.TextTitle>
+                        <s.SpacerXSmall />
+                        {/* 
                 <s.TextTitle
                   style={{
                     textAlign: "center",
@@ -357,11 +321,11 @@ function App() {
                 </s.TextDescription> */}
 
 
-                      <s.SpacerSmall />
-                      {blockchain.account === "" ||
-                        blockchain.smartContract === null ? (
-                        <s.Container ai={"center"} jc={"center"}>
-                          {/* <s.TextDescription
+                        <s.SpacerSmall />
+                        {blockchain.account === "" ||
+                          blockchain.smartContract === null ? (
+                          <s.Container ai={"center"} jc={"center"}>
+                            {/* <s.TextDescription
                       style={{
                         textAlign: "center",
                         color: "var(--accent-text)",
@@ -369,141 +333,146 @@ function App() {
                     >
                       Connect to the {CONFIG.NETWORK.NAME} network
                     </s.TextDescription> */}
-                          <s.SpacerSmall />
-                          <Button animate layer='primary' onClick={(e) => {
-                            e.preventDefault();
-                            dispatch(connect());
-                            getData();
-                            clickAudio.play();
-                          }}>
-                            CONNECT TO THE NEXUS CORE
-                          </Button>
-                          {blockchain.errorMsg !== "" ? (
-                            <>
-                              <s.SpacerSmall />
-                              <s.TextDescription
-                                style={{
-                                  textAlign: "center",
-                                  color: "var(--accent-text)",
-                                }}
-                              >
-                                {blockchain.errorMsg}
-                              </s.TextDescription>
-                            </>
-                          ) : null}
-                        </s.Container>
-                      ) : (
-                        <>
-                          <s.TextDescription
-                            style={{
-                              textAlign: "center",
-                              color: "var(--accent-text)",
-                            }}
-                          >
-                            {feedback}
-                          </s.TextDescription>
+                            <s.SpacerSmall />
+                            <Frame
+                              animate
+                              level={3}
+                              corners={10}
+                              layer='primary'
+                              disabled={claimingNft ? 1 : 0}
+                              onClick={(e) => {
+                                e.preventDefault();
+                                dispatch(connect());
+                                getData();
+                              }}
+                            >
+                              <span style={{ padding: '20px 30px', }}>CONNECT TO THE NEXUS CORE</span>
+                            </Frame>
 
-                          <s.SpacerMedium />
-
-                          <s.Container ai={"center"} jc={"center"} fd={"row"} style={{ width: 125 }}>
-                            {/* <StyledRoundButton
-                        style={{ lineHeight: 0.4 }}
-                        disabled={claimingNft ? 1 : 0}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          decrementMintAmount();
-                        }}
-                      >
-                        -
-                      </StyledRoundButton> */}
-                            <s.SpacerMedium />
+                            {blockchain.errorMsg !== "" ? (
+                              <>
+                                <s.SpacerSmall />
+                                <s.TextDescription
+                                  style={{
+                                    textAlign: "center",
+                                    color: "var(--accent-text)",
+                                  }}
+                                >
+                                  {blockchain.errorMsg}
+                                </s.TextDescription>
+                              </>
+                            ) : null}
+                          </s.Container>
+                        ) : (
+                          <>
+                            <Words>{data.totalSupply} / {CONFIG.MAX_SUPPLY}</Words>
 
                             <s.TextDescription
                               style={{
                                 textAlign: "center",
                                 color: "var(--accent-text)",
-                                fontSize: 20,
                               }}
                             >
-                              <Loading animate />
-
-                              {mintAmount}
+                              {feedback}
                             </s.TextDescription>
+                            <Loading />
+
+
                             <s.SpacerMedium />
-                            {/* <StyledRoundButton
-                        disabled={claimingNft ? 1 : 0}
-                        onClick={(e) => {
-                          e.preventDefault();
-                          incrementMintAmount();
-                        }}
-                      >
-                        +
-                      </StyledRoundButton> */}
-                          </s.Container>
 
-                          <s.SpacerSmall />
-                          <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                            <Button animate layer='primary' disabled={claimingNft ? 1 : 0}
-                              onClick={(e) => {
-                                e.preventDefault();
-                                claimNFTs();
-                                getData();
-                                clickAudio.play();
-                              }}>
-                              {claimingNft ? "ASCENDING!" : "MINT"}
-                            </Button>
-                          </s.Container>
+                            <s.Container ai={'center'} jc={'center'} fd={'row'} style={{ width: 125 }}>
+                              <Button animate
+                                layer="alert"
+                                disabled={claimingNft ? 1 : 0}
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  decrementMintAmount();
+                                }}
+                              >
+                                <FaMinus size={15} />
+                              </Button>
 
-                          <s.SpacerSmall />
+                              <s.TextDescription
+                                style={{
+                                  padding: '0 20px', // Add padding to create spacing around the mint amount
+                                  textAlign: 'center',
+                                  color: 'var(--accent-text)',
+                                  fontSize: 25,
+                                }}
+                              >
+                                {mintAmount}
+                              </s.TextDescription>
 
-                          {/* <s.Container ai={"center"} jc={"center"} fd={"row"}>
-                      <StyledButton
-                        onClick={(e) => {
-                          whaleMint();
+                              <Button animate
+                                layer="success"
+                                disabled={claimingNft ? 1 : 0}
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  incrementMintAmount();
+                                }}
+                              >
+                                <FaPlus size={15} />
+                              </Button>
+                            </s.Container>
 
-                        }}
-                      >
-                        🐋
-                      </StyledButton>
+                            <s.SpacerSmall />
 
-                    </s.Container> */}
+                            <s.Container ai={'center'} jc={'center'} fd={'row'}>
+                              <Frame
+                                animate
+                                level={3}
+                                corners={5}
+                                layer='primary'
+                                disabled={claimingNft ? 1 : 0}
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  claimNFTs();
+                                  getData();
+                                  clickAudio.play();
+                                }}
+                              >
+                                <span style={{ padding: '20px 30px', }}>{claimingNft ? 'ASCENDING!' : 'MINT'}</span>
+                              </Frame>
+                            </s.Container>
 
-                        </>
-                      )}
-                    </>
-                  )}
-                  <s.SpacerMedium />
 
+                            <s.SpacerSmall />
+
+                          </>
+                        )}
+                      </>
+                    )}
+                    <s.SpacerMedium />
+
+                  </s.Container>
+
+                  <StyledLink target={"_blank"} href={CONFIG.SCAN_LINK} onClick={(e) => { clickAudio.play(); }}>
+                    See The Nexus Ethereals Contract
+                  </StyledLink>
+
+                  <br />
+
+                  <a rel="noopener noreferrer" target={"_blank"} href="https://exrp.viewer.thenexusportal.io/">
+                    <Logo animate size={100} onClick={(e) => { clickAudio.play(); }} />
+                  </a>
+                  <br />
+
+                  <StyledLink target={"_blank"} href={"https://exrp.viewer.thenexusportal.io/"} onClick={(e) => { clickAudio.play(); }}>
+                    {"SEE YOUR NEXUS ETHEREALS"}
+                  </StyledLink>
+                  <br />
+                  <s.Container flex={1} jc={"center"} ai={"center"} >
+                    <StyledImg alt={"previewgif"} src={"/config/images/preview.gif"} target={"_blank"} href={"https://exrp.viewer.thenexusportal.io/"} />
+                  </s.Container>
 
 
                 </s.Container>
-                <s.SpacerLarge />
+              </ResponsiveWrapper>
+            </s.Screen >
+          </Frame>
+        </Arwes>
+      </SoundsProvider>
 
-
-
-                {/* <s.Container flex={1} jc={"center"} ai={"center"}>
-                <StyledImg alt={"coregif"} src={"/config/images/example.gif"} style={{ width: 125 }} target={"_blank"} href={"https://exrp.viewer.thenexusportal.io/"} />
-              </s.Container> */}
-
-                <br />
-                <a rel="noopener noreferrer" href="https://exrp.viewer.thenexusportal.io/">
-                  <Logo animate size={100} onClick={(e) => {clickAudio.play();}}/>
-                </a>
-                <br />
-
-                <StyledLink target={"_blank"} href={"https://exrp.viewer.thenexusportal.io/"} onClick={(e) => {clickAudio.play();}}>
-                  {"SEE YOUR NEXUS ETHEREALS"}
-                </StyledLink>
-                <br />
-                <s.Container flex={1} jc={"center"} ai={"center"} >
-                  <StyledImg alt={"previewgif"} src={"/config/images/preview.gif"} target={"_blank"} href={"https://exrp.viewer.thenexusportal.io/"} />
-                </s.Container>
-
-
-              </s.Container>
-            </ResponsiveWrapper>
-          </s.Screen >
-        </Frame>
     </ThemeProvider>
 
   );
