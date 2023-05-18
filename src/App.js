@@ -196,7 +196,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <SoundsProvider sounds={sounds}>
 
-        <Arwes>
+        <Arwes animate>
           <Frame animate>
             <s.Screen>
               <ResponsiveWrapper>
