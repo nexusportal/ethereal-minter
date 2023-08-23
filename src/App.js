@@ -271,8 +271,8 @@ function App() {
                     >
 
                       <br />
-                      <StyledLink target={"_blank"} href={"https://xrpl.org/get-started-evm-sidechain.html"} onClick={(e) => { clickAudio.play(); }}>
-                        LEARN TO BRIDGE TO EXRP
+                      <StyledLink target={"_blank"} href={"https://faucet.apothem.network/"} onClick={(e) => { clickAudio.play(); }}>
+                        tXDC Faucet
                       </StyledLink>
 
                     </s.TextDescription>
@@ -452,17 +452,17 @@ function App() {
 
                   <br />
 
-                  <a rel="noopener noreferrer" target={"_blank"} href="https://exrp.viewer.thenexusportal.io/">
+                  <a rel="noopener noreferrer" target={"_blank"} href="https://apothem.viewer.thenexusportal.io/">
                     <Logo animate size={100} onClick={(e) => { clickAudio.play(); }} />
                   </a>
                   <br />
 
-                  <StyledLink target={"_blank"} href={"https://exrp.viewer.thenexusportal.io/"} onClick={(e) => { clickAudio.play(); }}>
+                  <StyledLink target={"_blank"} href={"https://apothem.viewer.thenexusportal.io/"} onClick={(e) => { clickAudio.play(); }}>
                     {"SEE YOUR NEXUS ETHEREALS"}
                   </StyledLink>
                   <br />
                   <s.Container flex={1} jc={"center"} ai={"center"} >
-                    <StyledImg alt={"previewgif"} src={"/config/images/preview.gif"} target={"_blank"} href={"https://exrp.viewer.thenexusportal.io/"} />
+                    <StyledImg alt={"previewgif"} src={"/config/images/preview.gif"} target={"_blank"} href={"https://apothem.viewer.thenexusportal.io/"} />
                   </s.Container>
 
 

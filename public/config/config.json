@@ -1,10 +1,10 @@
 {
-  "CONTRACT_ADDRESS": "0x58F65d03b8d5e793D042236dBba142de40fd6a94",
-  "SCAN_LINK": "https://evm-sidechain.xrpl.org/token/0x58F65d03b8d5e793D042236dBba142de40fd6a94",
+  "CONTRACT_ADDRESS": "0xEb7541D63C9d7E922E7f58A7bAA83c4C5fB91060",
+  "SCAN_LINK": "https://apothem.blocksscan.io/tokens/xdceb7541d63c9d7e922e7f58a7baa83c4c5fb91060#tokenTransfers",
   "NETWORK": {
-    "NAME": "eXRP ",
-    "SYMBOL": "eXRP",
-    "ID": 1440001
+    "NAME": "tXDC ",
+    "SYMBOL": "tXDC",
+    "ID": 51
   },
   "NFT_NAME": "Nexus Ethereals",
   "SYMBOL": "ETHER",
