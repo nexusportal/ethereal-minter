@@ -32,7 +32,7 @@ const rotateAnimation = keyframes`
 const sounds = {
   shared: { volume: 1 },
   players: {
-    click: { sound: { src: ['/click.mp3'] } },
+    click: { sound: { src: ['/object.mp3'] } },
     typing: { sound: { src: ['/type.mp3'] } },
     deploy: { sound: { src: ['/object.mp3'] } },
   },
