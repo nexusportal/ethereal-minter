@@ -272,7 +272,7 @@ function App() {
 
                       <br />
                       <StyledLink target={"_blank"} href={"https://faucet.apothem.network/"} onClick={(e) => { clickAudio.play(); }}>
-                        tXDC Faucet
+                        💦tXDC Faucet
                       </StyledLink>
 
                     </s.TextDescription>
