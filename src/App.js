@@ -191,6 +191,19 @@ function App() {
     getData();
   }, [blockchain.account]);
 
+  const [isWhaleMode, setIsWhaleMode] = useState(false); // Default to shrimp mode
+
+  const toggleWhaleMint = () => {
+    if (isWhaleMode) {
+      setMintAmount(1);
+      setIsWhaleMode(false);
+    } else {
+      setMintAmount(55);
+      setIsWhaleMode(true);
+    }
+  };
+
+
 
   return (
     <ThemeProvider theme={theme}>
@@ -457,7 +470,32 @@ function App() {
                                 <span style={{ padding: '20px 30px' }}>{claimingNft ? 'ASCENDING!' : 'MINT'}</span>
                               </Frame>
 
+
+
                             </s.Container>
+                            <center>
+                              <br/>
+                              <Frame
+                                animate
+                                level={3}
+                                corners={5}
+                                layer='primary'
+                                onClick={toggleWhaleMint}  // Here
+                                style={{
+                                  cursor: 'pointer'
+                                }}
+                                onMouseEnter={() => {
+                                  document.body.style.cursor = 'pointer';
+                                }}
+                                onMouseLeave={() => {
+                                  document.body.style.cursor = 'default';
+                                }}
+                              >
+                                <span style={{ padding: '20px 30px' }}>
+                                  {isWhaleMode ? "🦐" : "🐳"}
+                                </span>
+                              </Frame>
+                            </center>
 
 
                             <s.SpacerSmall />
