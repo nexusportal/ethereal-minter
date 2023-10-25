@@ -155,8 +155,8 @@ function App() {
 
   const incrementMintAmount = () => {
     let newMintAmount = mintAmount + 1;
-    if (newMintAmount > 10) {
-      newMintAmount = 10;
+    if (newMintAmount > 55) {
+      newMintAmount = 55;
     }
     setMintAmount(newMintAmount);
   };
@@ -271,8 +271,8 @@ function App() {
                     >
 
                       <br />
-                      <StyledLink target={"_blank"} href={"https://faucet.apothem.network/"} onClick={(e) => { clickAudio.play(); }}>
-                        tXDC Faucet
+                      <StyledLink target={"_blank"} href={"https://www.bitrue.com/trade/xdc_usdt"} onClick={(e) => { clickAudio.play(); }}>
+                        GET XDC
                       </StyledLink>
 
                     </s.TextDescription>
@@ -345,9 +345,21 @@ function App() {
                                 dispatch(connect());
                                 getData();
                               }}
+                              style={{
+                                cursor: 'pointer'
+                              }}
+                              onMouseEnter={() => {
+                                if (!claimingNft) {
+                                  document.body.style.cursor = 'pointer';
+                                }
+                              }}
+                              onMouseLeave={() => {
+                                document.body.style.cursor = 'default';
+                              }}
                             >
-                              <span style={{ padding: '20px 30px', }}>CONNECT TO THE NEXUS CORE</span>
+                              <span style={{ padding: '20px 30px' }}>CONNECT TO THE NEXUS CORE</span>
                             </Frame>
+
 
                             {blockchain.errorMsg !== "" ? (
                               <>
@@ -430,9 +442,21 @@ function App() {
                                   getData();
                                   clickAudio.play();
                                 }}
+                                style={{
+                                  cursor: 'pointer'
+                                }}
+                                onMouseEnter={() => {
+                                  if (!claimingNft) {
+                                    document.body.style.cursor = 'pointer';
+                                  }
+                                }}
+                                onMouseLeave={() => {
+                                  document.body.style.cursor = 'default';
+                                }}
                               >
-                                <span style={{ padding: '20px 30px', }}>{claimingNft ? 'ASCENDING!' : 'MINT'}</span>
+                                <span style={{ padding: '20px 30px' }}>{claimingNft ? 'ASCENDING!' : 'MINT'}</span>
                               </Frame>
+
                             </s.Container>
 
 
@@ -447,22 +471,22 @@ function App() {
                   </s.Container>
 
                   <StyledLink target={"_blank"} href={CONFIG.SCAN_LINK} onClick={(e) => { clickAudio.play(); }}>
-                    See The Nexus Ethereals Contract
+                    See The Nexus Celestials Contract
                   </StyledLink>
 
                   <br />
 
-                  <a rel="noopener noreferrer" target={"_blank"} href="https://apothem.viewer.thenexusportal.io/">
+                  <a rel="noopener noreferrer" target={"_blank"} href="https://xdc.viewer.thenexusportal.io/">
                     <Logo animate size={100} onClick={(e) => { clickAudio.play(); }} />
                   </a>
                   <br />
 
-                  <StyledLink target={"_blank"} href={"https://apothem.viewer.thenexusportal.io/"} onClick={(e) => { clickAudio.play(); }}>
-                    {"SEE YOUR NEXUS ETHEREALS"}
+                  <StyledLink target={"_blank"} href={"https://xdc.viewer.thenexusportal.io/"} onClick={(e) => { clickAudio.play(); }}>
+                    {"SEE YOUR NEXUS CELESTIALS"}
                   </StyledLink>
                   <br />
                   <s.Container flex={1} jc={"center"} ai={"center"} >
-                    <StyledImg alt={"previewgif"} src={"/config/images/preview.gif"} target={"_blank"} href={"https://apothem.viewer.thenexusportal.io/"} />
+                    <StyledImg alt={"previewgif"} src={"/config/images/preview.gif"} target={"_blank"} href={"https://xdc.viewer.thenexusportal.io/"} />
                   </s.Container>
 
 

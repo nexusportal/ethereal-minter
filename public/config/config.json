@@ -1,16 +1,16 @@
 {
-  "CONTRACT_ADDRESS": "0xEb7541D63C9d7E922E7f58A7bAA83c4C5fB91060",
-  "SCAN_LINK": "https://apothem.blocksscan.io/tokens/xdceb7541d63c9d7e922e7f58a7baa83c4c5fb91060#tokenTransfers",
+  "CONTRACT_ADDRESS": "0xF068F2698a748A970970de3f4CD237E6b76b1fEf",
+  "SCAN_LINK": "https://xdcscan.io/address/xdcf068f2698a748a970970de3f4cd237e6b76b1fef",
   "NETWORK": {
-    "NAME": "tXDC ",
-    "SYMBOL": "tXDC",
-    "ID": 51
+    "NAME": "XDC ",
+    "SYMBOL": "XDC",
+    "ID": 50
   },
-  "NFT_NAME": "Nexus Ethereals",
+  "NFT_NAME": "Nexus Celestials",
   "SYMBOL": "ETHER",
-  "MAX_SUPPLY": 11111,
-  "ETH_COST": 333,
-  "DISPLAY_COST": 333,
+  "MAX_SUPPLY": 8888,
+  "ETH_COST": 3,
+  "DISPLAY_COST": 3,
   "GAS_LIMIT": 2500000,
   "MARKETPLACE": "https://thenexusportal.io/",
   "MARKETPLACE_LINK": "https://thenexusportal.io/",
