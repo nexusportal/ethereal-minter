@@ -87,6 +87,8 @@ export const StyledLink = styled.a`
 
 `;
 
+
+
 function App() {
   const dispatch = useDispatch();
   const blockchain = useSelector((state) => state.blockchain);
@@ -94,6 +96,10 @@ function App() {
   const [claimingNft, setClaimingNft] = useState(false);
   const [feedback, setFeedback] = useState(`You are making history!`);
   const [mintAmount, setMintAmount] = useState(1);
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+  const [isWhaleMode, setIsWhaleMode] = useState(false); // Default to shrimp mode
+
+
   const [CONFIG, SET_CONFIG] = useState({
     CONTRACT_ADDRESS: "",
     SCAN_LINK: "",
@@ -191,7 +197,13 @@ function App() {
     getData();
   }, [blockchain.account]);
 
-  const [isWhaleMode, setIsWhaleMode] = useState(false); // Default to shrimp mode
+  useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth);
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+
 
   const toggleWhaleMint = () => {
     if (isWhaleMode) {
@@ -213,26 +225,45 @@ function App() {
           <Frame animate>
             <s.Screen>
               <ResponsiveWrapper>
-                <video
-                  autoPlay
-                  loop
-                  muted
-                  style={{
-                    position: "fixed",
-                    width: "100%",
-                    left: "50%",
-                    top: "50%",
-                    height: "100%",
-                    objectFit: "cover",
-                    transform: "translate(-50%, -50%)",
-                    zIndex: "-1",
+                {windowWidth > 768 ? ( // 768px is a common breakpoint for tablets. Adjust as necessary.
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    style={{
+                      position: "fixed",
+                      width: "100%",
+                      left: "50%",
+                      top: "50%",
+                      height: "100%",
+                      objectFit: "cover",
+                      transform: "translate(-50%, -50%)",
+                      zIndex: "-1",
 
 
-                  }}>
+                    }}>
 
-                  <source src={loop} type="video/mp4" />
+                    <source src={loop} type="video/mp4" />
 
-                </video>
+                  </video>
+                ) : (
+                  <img
+                    src="/config/images/bg.jpg"
+                    alt="Background"
+                    style={{
+                      position: "fixed",
+                      width: "100%",
+                      left: "50%",
+                      top: "50%",
+                      height: "100%",
+                      objectFit: "cover",
+                      transform: "translate(-50%, -50%)",
+                      zIndex: "-1"
+                    }}
+                  />
+
+                )}
+
 
 
                 <s.Container
@@ -474,7 +505,7 @@ function App() {
 
                             </s.Container>
                             <center>
-                              <br/>
+                              <br />
                               <Frame
                                 animate
                                 level={3}
