@@ -476,17 +476,17 @@ function App() {
 
                   <br />
 
-                  <a rel="noopener noreferrer" target={"_blank"} href="https://xdc.viewer.thenexusportal.io/">
+                  <a rel="noopener noreferrer" target={"_blank"} href="https://viewer.thenexusportal.io/">
                     <Logo animate size={100} onClick={(e) => { clickAudio.play(); }} />
                   </a>
                   <br />
 
-                  <StyledLink target={"_blank"} href={"https://xdc.viewer.thenexusportal.io/"} onClick={(e) => { clickAudio.play(); }}>
+                  <StyledLink target={"_blank"} href={"https://viewer.thenexusportal.io/"} onClick={(e) => { clickAudio.play(); }}>
                     {"SEE YOUR NEXUS CELESTIALS"}
                   </StyledLink>
                   <br />
                   <s.Container flex={1} jc={"center"} ai={"center"} >
-                    <StyledImg alt={"previewgif"} src={"/config/images/preview.gif"} target={"_blank"} href={"https://xdc.viewer.thenexusportal.io/"} />
+                    <StyledImg alt={"previewgif"} src={"/config/images/preview.gif"} target={"_blank"} href={"https://viewer.thenexusportal.io/"} />
                   </s.Container>
 
 
