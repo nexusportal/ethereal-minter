@@ -315,7 +315,7 @@ function App() {
                     >
 
                       <br />
-                      <StyledLink target={"_blank"} href={"https://www.bitrue.com/trade/xdc_usdt"} onClick={(e) => { clickAudio.play(); }}>
+                      <StyledLink target={"_blank"} href={"https://xinfin.org/get-xdc"} onClick={(e) => { clickAudio.play(); }}>
                         GET XDC
                       </StyledLink>
 
@@ -349,6 +349,11 @@ function App() {
                           {CONFIG.NETWORK.SYMBOL}
                         </s.TextTitle>
                         <s.SpacerXSmall />
+                        <s.TextTitle
+                          style={{ textAlign: "center", color: "red" }}
+                        >
+                          ⏰50% Early Traverser Discount! Original Cost <s>2222</s> XDC🕊️
+                        </s.TextTitle>
                         {/* 
                 <s.TextTitle
                   style={{
