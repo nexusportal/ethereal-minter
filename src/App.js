@@ -352,7 +352,7 @@ function App() {
                         <s.TextTitle
                           style={{ textAlign: "center", color: "red" }}
                         >
-                          ⏰50% Early Traverser Discount! Original Cost <s>2222</s> XDC🕊️
+                          ⏰25% Early Traverser Discount! Original Cost <s>2222</s> XDC🕊️
                         </s.TextTitle>
                         {/* 
                 <s.TextTitle
