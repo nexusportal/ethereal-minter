@@ -3,6 +3,7 @@ import Web3EthContract from "web3-eth-contract";
 import Web3 from "web3";
 // log
 import { fetchData } from "../data/dataActions";
+import { referral_abi, referral_address } from "../../config/referral";
 
 const connectRequest = () => {
   return {
@@ -53,25 +54,31 @@ export const connect = () => {
     if (metamaskIsInstalled) {
       Web3EthContract.setProvider(ethereum);
       let web3 = new Web3(ethereum);
-      
+
       try {
         const accounts = await ethereum.request({
           method: "eth_requestAccounts",
-          
+
         });
-        console.log(accounts)
         const networkId = await ethereum.request({
           method: "net_version",
         });
         if (networkId == CONFIG.NETWORK.ID) {
+          const ReferralContractObj = new Web3EthContract(
+            referral_abi,
+            referral_address
+          );
+          const nft_address = await ReferralContractObj.methods.nexusNFT().call();
           const SmartContractObj = new Web3EthContract(
             abi,
-            CONFIG.CONTRACT_ADDRESS
+            nft_address
+            // CONFIG.CONTRACT_ADDRESS
           );
           dispatch(
             connectSuccess({
               account: accounts[0],
               smartContract: SmartContractObj,
+              referralContract: ReferralContractObj,
               web3: web3,
             })
           );

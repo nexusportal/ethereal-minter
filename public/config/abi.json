@@ -31,6 +31,32 @@
 			{
 				"indexed": true,
 				"internalType": "address",
+				"name": "_address",
+				"type": "address"
+			}
+		],
+		"name": "AddressAdded",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
+				"name": "_address",
+				"type": "address"
+			}
+		],
+		"name": "AddressRemoved",
+		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": true,
+				"internalType": "address",
 				"name": "owner",
 				"type": "address"
 			},
@@ -118,6 +144,32 @@
 		],
 		"name": "Transfer",
 		"type": "event"
+	},
+	{
+		"anonymous": false,
+		"inputs": [
+			{
+				"indexed": false,
+				"internalType": "bool",
+				"name": "_enabled",
+				"type": "bool"
+			}
+		],
+		"name": "WhitelistToggled",
+		"type": "event"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address[]",
+				"name": "_addresses",
+				"type": "address[]"
+			}
+		],
+		"name": "addToWhitelist",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
 	},
 	{
 		"inputs": [
@@ -234,6 +286,32 @@
 		"type": "function"
 	},
 	{
+		"inputs": [],
+		"name": "getWhitelistCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "getWhitelistDiscount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
 		"inputs": [
 			{
 				"internalType": "address",
@@ -261,7 +339,7 @@
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "_user",
+				"name": "_address",
 				"type": "address"
 			}
 		],
@@ -279,6 +357,19 @@
 	{
 		"inputs": [],
 		"name": "maxMintAmount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "maxNFTPerAddress",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -330,38 +421,12 @@
 	},
 	{
 		"inputs": [],
-		"name": "nftPerAddressLimit",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
 		"name": "notRevealedUri",
 		"outputs": [
 			{
 				"internalType": "string",
 				"name": "",
 				"type": "string"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "onlyWhitelisted",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
@@ -426,6 +491,19 @@
 		"type": "function"
 	},
 	{
+		"inputs": [
+			{
+				"internalType": "address[]",
+				"name": "_addresses",
+				"type": "address[]"
+			}
+		],
+		"name": "removeFromWhitelist",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
 		"inputs": [],
 		"name": "renounceOwnership",
 		"outputs": [],
@@ -433,7 +511,13 @@
 		"type": "function"
 	},
 	{
-		"inputs": [],
+		"inputs": [
+			{
+				"internalType": "bool",
+				"name": "_state",
+				"type": "bool"
+			}
+		],
 		"name": "reveal",
 		"outputs": [],
 		"stateMutability": "nonpayable",
@@ -494,7 +578,7 @@
 			},
 			{
 				"internalType": "bytes",
-				"name": "_data",
+				"name": "data",
 				"type": "bytes"
 			}
 		],
@@ -563,19 +647,6 @@
 	{
 		"inputs": [
 			{
-				"internalType": "uint256",
-				"name": "_limit",
-				"type": "uint256"
-			}
-		],
-		"name": "setNftPerAddressLimit",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
 				"internalType": "string",
 				"name": "_notRevealedURI",
 				"type": "string"
@@ -589,12 +660,12 @@
 	{
 		"inputs": [
 			{
-				"internalType": "bool",
-				"name": "_state",
-				"type": "bool"
+				"internalType": "uint256",
+				"name": "discount",
+				"type": "uint256"
 			}
 		],
-		"name": "setOnlyWhitelisted",
+		"name": "setWhitelistDiscount",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -608,6 +679,19 @@
 			}
 		],
 		"name": "setmaxMintAmount",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_limit",
+				"type": "uint256"
+			}
+		],
+		"name": "setmaxNFTPerAddress",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -642,6 +726,19 @@
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "bool",
+				"name": "_enabled",
+				"type": "bool"
+			}
+		],
+		"name": "toggleWhitelist",
+		"outputs": [],
+		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -777,30 +874,17 @@
 	{
 		"inputs": [
 			{
-				"internalType": "address[]",
-				"name": "_users",
-				"type": "address[]"
-			}
-		],
-		"name": "whitelistUsers",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "whitelistedAddresses",
-		"outputs": [
-			{
 				"internalType": "address",
 				"name": "",
 				"type": "address"
+			}
+		],
+		"name": "whitelist",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
@@ -808,10 +892,54 @@
 	},
 	{
 		"inputs": [],
+		"name": "whitelistCount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "whitelistDiscount",
+		"outputs": [
+			{
+				"internalType": "uint256",
+				"name": "",
+				"type": "uint256"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "whitelistEnabled",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "address",
+				"name": "to",
+				"type": "address"
+			}
+		],
 		"name": "withdraw",
 		"outputs": [],
 		"stateMutability": "payable",
 		"type": "function"
 	}
 ]
-

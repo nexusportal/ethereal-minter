@@ -1,5 +1,6 @@
 // log
 import store from "../store";
+import Web3 from "web3";
 
 const fetchDataRequest = () => {
   return {
@@ -29,15 +30,19 @@ export const fetchData = () => {
         .getState()
         .blockchain.smartContract.methods.totalSupply()
         .call();
-      // let cost = await store
-      //   .getState()
-      //   .blockchain.smartContract.methods.cost()
-      //   .call();
-
+      let cost = await store
+        .getState()
+        .blockchain.smartContract.methods.cost()
+        .call();
+      let discount = await store
+        .getState()
+        .blockchain.smartContract.methods.getWhitelistDiscount()
+        .call();
       dispatch(
         fetchDataSuccess({
           totalSupply,
-          // cost,
+          cost: Web3.utils.fromWei(cost),
+          discount: Web3.utils.fromWei(discount)
         })
       );
     } catch (err) {

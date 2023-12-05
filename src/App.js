@@ -10,6 +10,7 @@ import { FaTelegramPlane, FaDiscord, FaTwitter, FaPlus, FiMinus, FaMinus } from 
 import loop from './bg.mp4'
 import { Arwes, ThemeProvider, SoundsProvider, createSounds, createTheme, Frame, Button, Loading, Logo, Words } from 'arwes';
 import clickSound from './object.mp3';
+import { referral_address } from "./config/referral";
 
 const theme = createTheme({
   typography: {
@@ -99,6 +100,8 @@ function App() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
   const [isWhaleMode, setIsWhaleMode] = useState(false); // Default to shrimp mode
 
+  const query = new URLSearchParams(location.search);
+  const referrer = query.get('referrer')
 
   const [CONFIG, SET_CONFIG] = useState({
     CONTRACT_ADDRESS: "",
@@ -119,20 +122,32 @@ function App() {
     SHOW_BACKGROUND: false,
   });
 
-  const claimNFTs = () => {
-    let cost = CONFIG.ETH_COST;
-    let totalCostEther = String(cost * mintAmount);
+  const isValidAddress = (adr) => {
+    try {
+      const web3 = new Web3()
+      web3.utils.toChecksumAddress(adr)
+      return true
+    } catch (e) {
+      return false
+    }
+  }
+
+  const claimNFTs = (referrer_address) => {
+    // let cost = CONFIG.ETH_COST;
+    let cost = data.cost;
+    let discountedCost = cost - data.discount;
+    let totalCostEther = String(discountedCost * mintAmount);
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalGasLimit = String(gasLimit * mintAmount);
     console.log("Cost: ", totalCostEther);
     console.log("Gas limit: ", totalGasLimit);
     setFeedback(`Minting ${CONFIG.NFT_NAME}...`);
     setClaimingNft(true);
-    blockchain.smartContract.methods
-      .mint(mintAmount)
+    blockchain.referralContract.methods
+      .mintNFT(mintAmount, isValidAddress(referrer_address) ? referrer_address : blockchain.account)
       .send({
         gasLimit: String(totalGasLimit),
-        to: CONFIG.CONTRACT_ADDRESS,
+        to: referral_address,
         from: blockchain.account,
         value: Web3.utils.toWei(totalCostEther, "ether"),
       })
@@ -345,14 +360,15 @@ function App() {
                         <s.TextTitle
                           style={{ textAlign: "center", color: "var(--accent-text)" }}
                         >
-                          {CONFIG.NFT_NAME} cost {CONFIG.DISPLAY_COST}{" "}
+                          {/* {CONFIG.NFT_NAME} cost {CONFIG.DISPLAY_COST}{" "} */}
+                          {CONFIG.NFT_NAME} cost {data.cost - data.discount}{" "}
                           {CONFIG.NETWORK.SYMBOL}
                         </s.TextTitle>
                         <s.SpacerXSmall />
                         <s.TextTitle
                           style={{ textAlign: "center", color: "red" }}
                         >
-                          ⏰25% Early Traverser Discount! Original Cost <s>2222</s> XDC🕊️
+                          ⏰25% Early Traverser Discount! Original Cost <s>{data.cost}</s> XDC🕊️
                         </s.TextTitle>
                         {/* 
                 <s.TextTitle
@@ -487,7 +503,7 @@ function App() {
                                 disabled={claimingNft ? 1 : 0}
                                 onClick={(e) => {
                                   e.preventDefault();
-                                  claimNFTs();
+                                  claimNFTs(referrer);
                                   getData();
                                   clickAudio.play();
                                 }}
@@ -536,12 +552,21 @@ function App() {
 
                             <s.SpacerSmall />
 
+                            <div
+                              style={{
+                                height: '30px',
+                                cursor: "pointer"
+                              }}
+                              onClick={() => navigator.clipboard.writeText(`https://minter.thenexusportal.io/?referrer=${blockchain.account}`)}
+                            >
+                              copy referral link
+                            </div>
+
                           </>
                         )}
                       </>
                     )}
                     <s.SpacerMedium />
-
                   </s.Container>
 
                   <StyledLink target={"_blank"} href={CONFIG.SCAN_LINK} onClick={(e) => { clickAudio.play(); }}>
