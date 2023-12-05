@@ -135,7 +135,7 @@ function App() {
   const claimNFTs = (referrer_address) => {
     // let cost = CONFIG.ETH_COST;
     let cost = data.cost;
-    let discountedCost = cost - data.discount/2;
+    let discountedCost = cost - data.discount / 2;
     let totalCostEther = String(discountedCost * mintAmount);
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalGasLimit = String(gasLimit * mintAmount);
@@ -361,14 +361,25 @@ function App() {
                           style={{ textAlign: "center", color: "var(--accent-text)" }}
                         >
                           {/* {CONFIG.NFT_NAME} cost {CONFIG.DISPLAY_COST}{" "} */}
-                          {CONFIG.NFT_NAME} cost {data.cost - data.discount/2}{" "}
+                          {CONFIG.NFT_NAME} cost {data.cost - data.discount / 2}{" "}
                           {CONFIG.NETWORK.SYMBOL}
                         </s.TextTitle>
                         <s.SpacerXSmall />
                         <s.TextTitle
                           style={{ textAlign: "center", color: "red" }}
                         >
-                          ⏰25% Early Traverser Discount! Original Cost <s>{data.cost}</s> XDC🕊️
+                          📢 The Nexus Referal System 🌐
+                        </s.TextTitle>
+                        <s.TextTitle
+                          style={{ textAlign: "center", color: "red" }}
+                        >
+                          📲 10% Off For Reffered Minters & 10% To Referrers!
+                        </s.TextTitle>
+
+                        <s.TextTitle
+                          style={{ textAlign: "center", color: "green" }}
+                        >
+                          🔗 Connect Your Wallet To Generate Your Referral Code! 👩‍💻
                         </s.TextTitle>
                         {/* 
                 <s.TextTitle
@@ -442,6 +453,35 @@ function App() {
                           </s.Container>
                         ) : (
                           <>
+
+                            <center>
+                              <Frame
+                                animate
+                                level={3}
+                                corners={5}
+                                layer='primary'
+                                onClick={() => {
+                                  navigator.clipboard.writeText(`https://refer.thenexusportal.io/?referrer=${blockchain.account}`);
+                                  clickAudio.play();
+                                }}
+                                style={{
+                                  cursor: 'pointer'
+                                }}
+                                onMouseEnter={() => {
+                                  document.body.style.cursor = 'pointer';
+                                }}
+                                onMouseLeave={() => {
+                                  document.body.style.cursor = 'default';
+                                }}
+                              >
+                                <span style={{ padding: '20px 30px' }}>
+                                  Copy Your Referral Link
+                                </span>
+                              </Frame>
+                            </center>
+
+                            <s.SpacerSmall />
+
                             <Words>{data.totalSupply} / {CONFIG.MAX_SUPPLY}</Words>
 
                             <s.TextDescription
@@ -551,16 +591,6 @@ function App() {
 
 
                             <s.SpacerSmall />
-
-                            <div
-                              style={{
-                                height: '30px',
-                                cursor: "pointer"
-                              }}
-                              onClick={() => navigator.clipboard.writeText(`https://minter.thenexusportal.io/?referrer=${blockchain.account}`)}
-                            >
-                              copy referral link
-                            </div>
 
                           </>
                         )}
