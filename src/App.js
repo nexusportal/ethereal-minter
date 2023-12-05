@@ -135,7 +135,7 @@ function App() {
   const claimNFTs = (referrer_address) => {
     // let cost = CONFIG.ETH_COST;
     let cost = data.cost;
-    let discountedCost = cost - data.discount;
+    let discountedCost = cost - data.discount/2;
     let totalCostEther = String(discountedCost * mintAmount);
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalGasLimit = String(gasLimit * mintAmount);
@@ -361,7 +361,7 @@ function App() {
                           style={{ textAlign: "center", color: "var(--accent-text)" }}
                         >
                           {/* {CONFIG.NFT_NAME} cost {CONFIG.DISPLAY_COST}{" "} */}
-                          {CONFIG.NFT_NAME} cost {data.cost - data.discount}{" "}
+                          {CONFIG.NFT_NAME} cost {data.cost - data.discount/2}{" "}
                           {CONFIG.NETWORK.SYMBOL}
                         </s.TextTitle>
                         <s.SpacerXSmall />
