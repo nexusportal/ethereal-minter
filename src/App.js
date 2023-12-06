@@ -479,6 +479,31 @@ function App() {
                                 </span>
                               </Frame>
                             </center>
+                            <s.SpacerSmall />
+
+                            <div
+                              style={{
+                                cursor: 'pointer', // Change cursor to pointer to indicate it's clickable
+                                textAlign: "center",
+                              }}
+                              onClick={() => {
+                                navigator.clipboard.writeText(`https://refer.thenexusportal.io/?referrer=${blockchain.account}`);
+                                // Optionally, you can add feedback for successful copy, like a tooltip or a visual cue
+                              }}
+                              onTouchEnd={() => { // For touch device support
+                                navigator.clipboard.writeText(`https://refer.thenexusportal.io/?referrer=${blockchain.account}`);
+                                // Optional feedback for touch devices
+                              }}
+                            >
+                              <s.TextDescription
+                                style={{
+                                  color: "#73C2FB",
+                                  wordBreak: "break-all",
+                                }}
+                              >
+                                {`https://refer.thenexusportal.io/?referrer=${blockchain.account}`}
+                              </s.TextDescription>
+                            </div>
 
                             <s.SpacerSmall />
 
