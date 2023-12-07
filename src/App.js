@@ -133,38 +133,52 @@ function App() {
   }
 
   const claimNFTs = (referrer_address) => {
-    // let cost = CONFIG.ETH_COST;
     let cost = data.cost;
     let discountedCost = cost - data.discount / 2;
     let totalCostEther = String(discountedCost * mintAmount);
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalGasLimit = String(gasLimit * mintAmount);
+
     console.log("Cost: ", totalCostEther);
     console.log("Gas limit: ", totalGasLimit);
+
     setFeedback(`Minting ${CONFIG.NFT_NAME}...`);
     setClaimingNft(true);
+
+    // Check if the referrer address and blockchain account are valid and not the same
+    if (referrer_address && blockchain.account && 
+        referrer_address.toLowerCase() === blockchain.account.toLowerCase()) {
+        setFeedback("You cannot refer yourself.");
+        setClaimingNft(false);
+        return;
+    }
+
+    // Use a placeholder address if referrer_address is blank or invalid
+    const PLACEHOLDER_ADDRESS = "0x5272CAeB01711AF57A119A53BE1b863cDe8178bd"; // Replace with your placeholder address
+    const referrerToUse = (referrer_address && isValidAddress(referrer_address)) ? referrer_address : PLACEHOLDER_ADDRESS;
+
     blockchain.referralContract.methods
-      .mintNFT(mintAmount, isValidAddress(referrer_address) ? referrer_address : blockchain.account)
-      .send({
-        gasLimit: String(totalGasLimit),
-        to: referral_address,
-        from: blockchain.account,
-        value: Web3.utils.toWei(totalCostEther, "ether"),
-      })
-      .once("error", (err) => {
-        console.log(err);
-        setFeedback("Sorry, something went wrong please try again later.");
-        setClaimingNft(false);
-      })
-      .then((receipt) => {
-        console.log(receipt);
-        setFeedback(
-          `You have summoned ${CONFIG.NFT_NAME}!`
-        );
-        setClaimingNft(false);
-        dispatch(fetchData(blockchain.account));
-      });
-  };
+        .mintNFT(mintAmount, referrerToUse)
+        .send({
+            gasLimit: String(totalGasLimit),
+            to: CONFIG.CONTRACT_ADDRESS,
+            from: blockchain.account,
+            value: Web3.utils.toWei(totalCostEther, "ether"),
+        })
+        .once("error", (err) => {
+            console.log(err);
+            setFeedback("Sorry, something went wrong please try again later.");
+            setClaimingNft(false);
+        })
+        .then((receipt) => {
+            console.log(receipt);
+            setFeedback(
+                `You have summoned ${CONFIG.NFT_NAME}!`
+            );
+            setClaimingNft(false);
+            dispatch(fetchData(blockchain.account));
+        });
+};
 
   const decrementMintAmount = () => {
     let newMintAmount = mintAmount - 1;
@@ -483,16 +497,14 @@ function App() {
 
                             <div
                               style={{
-                                cursor: 'pointer', // Change cursor to pointer to indicate it's clickable
+                                cursor: 'pointer',
                                 textAlign: "center",
                               }}
                               onClick={() => {
                                 navigator.clipboard.writeText(`https://refer.thenexusportal.io/?referrer=${blockchain.account}`);
-                                // Optionally, you can add feedback for successful copy, like a tooltip or a visual cue
                               }}
-                              onTouchEnd={() => { // For touch device support
+                              onTouchEnd={() => {
                                 navigator.clipboard.writeText(`https://refer.thenexusportal.io/?referrer=${blockchain.account}`);
-                                // Optional feedback for touch devices
                               }}
                             >
                               <s.TextDescription
