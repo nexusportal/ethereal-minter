@@ -146,39 +146,39 @@ function App() {
     setClaimingNft(true);
 
     // Check if the referrer address and blockchain account are valid and not the same
-    if (referrer_address && blockchain.account && 
-        referrer_address.toLowerCase() === blockchain.account.toLowerCase()) {
-        setFeedback("You cannot refer yourself.");
-        setClaimingNft(false);
-        return;
+    if (referrer_address && blockchain.account &&
+      referrer_address.toLowerCase() === blockchain.account.toLowerCase()) {
+      setFeedback("You cannot refer yourself.");
+      setClaimingNft(false);
+      return;
     }
 
     // Use a placeholder address if referrer_address is blank or invalid
-    const PLACEHOLDER_ADDRESS = "0x5272CAeB01711AF57A119A53BE1b863cDe8178bd"; // Replace with your placeholder address
+    const PLACEHOLDER_ADDRESS = "0x5272CAeB01711AF57A119A53BE1b863cDe8178bd";
     const referrerToUse = (referrer_address && isValidAddress(referrer_address)) ? referrer_address : PLACEHOLDER_ADDRESS;
 
     blockchain.referralContract.methods
-        .mintNFT(mintAmount, referrerToUse)
-        .send({
-            gasLimit: String(totalGasLimit),
-            to: CONFIG.CONTRACT_ADDRESS,
-            from: blockchain.account,
-            value: Web3.utils.toWei(totalCostEther, "ether"),
-        })
-        .once("error", (err) => {
-            console.log(err);
-            setFeedback("Sorry, something went wrong please try again later.");
-            setClaimingNft(false);
-        })
-        .then((receipt) => {
-            console.log(receipt);
-            setFeedback(
-                `You have summoned ${CONFIG.NFT_NAME}!`
-            );
-            setClaimingNft(false);
-            dispatch(fetchData(blockchain.account));
-        });
-};
+      .mintNFT(mintAmount, referrerToUse)
+      .send({
+        gasLimit: String(totalGasLimit),
+        to: CONFIG.CONTRACT_ADDRESS,
+        from: blockchain.account,
+        value: Web3.utils.toWei(totalCostEther, "ether"),
+      })
+      .once("error", (err) => {
+        console.log(err);
+        setFeedback("Sorry, something went wrong please try again later.");
+        setClaimingNft(false);
+      })
+      .then((receipt) => {
+        console.log(receipt);
+        setFeedback(
+          `You have summoned ${CONFIG.NFT_NAME}!`
+        );
+        setClaimingNft(false);
+        dispatch(fetchData(blockchain.account));
+      });
+  };
 
   const decrementMintAmount = () => {
     let newMintAmount = mintAmount - 1;
@@ -371,14 +371,7 @@ function App() {
                       </>
                     ) : (
                       <>
-                        <s.TextTitle
-                          style={{ textAlign: "center", color: "var(--accent-text)" }}
-                        >
-                          {/* {CONFIG.NFT_NAME} cost {CONFIG.DISPLAY_COST}{" "} */}
-                          {CONFIG.NFT_NAME} cost {data.cost - data.discount / 2}{" "}
-                          {CONFIG.NETWORK.SYMBOL}
-                        </s.TextTitle>
-                        <s.SpacerXSmall />
+
                         <s.TextTitle
                           style={{ textAlign: "center", color: "red" }}
                         >
@@ -518,6 +511,15 @@ function App() {
                             </div>
 
                             <s.SpacerSmall />
+
+                            <s.TextTitle
+                              style={{ textAlign: "center", color: "var(--accent-text)" }}
+                            >
+                              {/* {CONFIG.NFT_NAME} cost {CONFIG.DISPLAY_COST}{" "} */}
+                              {CONFIG.NFT_NAME} cost {data.cost - data.discount / 2}{" "}
+                              {CONFIG.NETWORK.SYMBOL}
+                            </s.TextTitle>
+                            <s.SpacerXSmall />
 
                             <Words>{data.totalSupply} / {CONFIG.MAX_SUPPLY}</Words>
 
