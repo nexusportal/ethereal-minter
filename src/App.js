@@ -131,20 +131,30 @@ function App() {
       return false
     }
   }
-
+  
+  const replaceXdcPrefix = (address) => {
+    if (address.toLowerCase().startsWith('xdc')) {
+      return '0x' + address.slice(3);
+    }
+    return address;
+  }
+  
   const claimNFTs = (referrer_address) => {
     let cost = data.cost;
     let discountedCost = cost - data.discount / 2;
     let totalCostEther = String(discountedCost * mintAmount);
     let gasLimit = CONFIG.GAS_LIMIT;
     let totalGasLimit = String(gasLimit * mintAmount);
-
+  
     console.log("Cost: ", totalCostEther);
     console.log("Gas limit: ", totalGasLimit);
-
+  
     setFeedback(`Minting ${CONFIG.NFT_NAME}...`);
     setClaimingNft(true);
-
+  
+    // Check and format the referrer address
+    referrer_address = replaceXdcPrefix(referrer_address);
+  
     // Check if the referrer address and blockchain account are valid and not the same
     if (referrer_address && blockchain.account &&
       referrer_address.toLowerCase() === blockchain.account.toLowerCase()) {
@@ -152,11 +162,11 @@ function App() {
       setClaimingNft(false);
       return;
     }
-
+  
     // Use a placeholder address if referrer_address is blank or invalid
     const PLACEHOLDER_ADDRESS = "0x5272CAeB01711AF57A119A53BE1b863cDe8178bd";
     const referrerToUse = (referrer_address && isValidAddress(referrer_address)) ? referrer_address : PLACEHOLDER_ADDRESS;
-
+  
     blockchain.referralContract.methods
       .mintNFT(mintAmount, referrerToUse)
       .send({
@@ -179,6 +189,7 @@ function App() {
         dispatch(fetchData(blockchain.account));
       });
   };
+  
 
   const decrementMintAmount = () => {
     let newMintAmount = mintAmount - 1;
