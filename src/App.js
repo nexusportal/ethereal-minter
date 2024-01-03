@@ -375,12 +375,12 @@ function App() {
                         <s.TextTitle
                           style={{ textAlign: "center", color: "red" }}
                         >
-                          📢 The Nexus Referal System 🌐
+                          📢 The Nexus Referral System 🌐
                         </s.TextTitle>
                         <s.TextTitle
                           style={{ textAlign: "center", color: "red" }}
                         >
-                          📲 10% Off For Reffered Minters & 10% To Referrers!
+                          📲 10% Off For Referred Minters & 10% To Referrers!
                         </s.TextTitle>
 
                         <s.TextTitle
