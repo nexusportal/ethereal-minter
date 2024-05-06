@@ -349,11 +349,6 @@ function App() {
                           {CONFIG.NETWORK.SYMBOL}
                         </s.TextTitle>
                         <s.SpacerXSmall />
-                        <s.TextTitle
-                          style={{ textAlign: "center", color: "red" }}
-                        >
-                          ⏰25% Early Traverser Discount! Original Cost <s>2222</s> XDC🕊️
-                        </s.TextTitle>
                         {/* 
                 <s.TextTitle
                   style={{
