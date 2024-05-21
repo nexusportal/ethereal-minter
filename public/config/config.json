@@ -7,10 +7,10 @@
     "ID": 50
   },
   "NFT_NAME": "Nexus Celestials✨",
-  "SYMBOL": "ETHER",
+  "SYMBOL": "CELEST",
   "MAX_SUPPLY": 8888,
-  "ETH_COST": 2222,
-  "DISPLAY_COST": 2222,
+  "ETH_COST": 3333,
+  "DISPLAY_COST": 3333,
   "GAS_LIMIT": 2500000,
   "MARKETPLACE": "https://thenexusportal.io/",
   "MARKETPLACE_LINK": "https://thenexusportal.io/",
