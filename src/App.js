@@ -282,7 +282,7 @@ function App() {
                     <a target="_blank" rel="noopener noreferrer" href="https://twitter.com/PoweredByNEXUS">
                       <FaTwitter color="white" size={30} />
                     </a>
-                    <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/nexusportal">
+                    <a target="_blank" rel="noopener noreferrer" href="https://discord.gg/nexusdefi">
                       <FaDiscord color="white" size={30} />
                     </a>
 
